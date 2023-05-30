@@ -1,0 +1,36 @@
+import nltk
+nltk.download('punkt')
+from nltk.corpus import stopwords
+nltk.download('stopwords')
+from nltk.tokenize import word_tokenize
+from nltk.probability import FreqDist
+from nltk.tag import pos_tag
+nltk.download('averaged_perceptron_tagger')
+
+text= (input("Enter the text: "))
+
+#tokenize the text into words
+words=word_tokenize(text)
+print("tokenized words:")
+print(words)
+
+#convert all words to lowercase
+words=[word.lower()for word in words]
+
+#count the frequency of each word
+fdist=FreqDist(words)
+print("word Frequency:")
+for word,freq in fdist.items():
+  print(f"{word}: {freq}")
+
+#remove stop words
+stop_words=set(stopwords.words("english"))
+filtered_words=[word for word in words if word.casefold()not in stop_words]
+print("Filtered words:")
+print(filtered_words)
+
+
+#perform POS tagging
+pos_tags=pos_tag(words)
+print("POS Tags:")
+print(pos_tags )
